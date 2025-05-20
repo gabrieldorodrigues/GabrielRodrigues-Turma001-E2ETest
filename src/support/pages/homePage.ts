@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test';
 
-export class HomePage {
+export class HomePage { // Certifique-se que está exportando a classe
   constructor(private page: Page) {}
 
   async acceptCookiesIfVisible() {
@@ -11,9 +11,7 @@ export class HomePage {
   }
 
   async search(term: string) {
-    const input = this.page.locator(
-      'input[placeholder="Search free high-resolution photos"]'
-    );
+    const input = this.page.locator('input[placeholder="Search free high-resolution photos"]');
     await input.fill(term);
     await input.press('Enter');
   }

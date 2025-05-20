@@ -1,0 +1,7 @@
+{
+  "searchTerm": "nature",
+  "validUser": {
+    "email": "usuario@exemplo.com",
+    "password": "senhaSegura123"
+  }
+}
