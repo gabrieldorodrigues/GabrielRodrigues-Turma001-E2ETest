@@ -9,19 +9,36 @@ on:
     - cron: '0 12 * * *'
 
 jobs:
-  build:
-    name: Run E2E Tests
+  e2e-normal:
+    name: Run Normal E2E Tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4.1.1
-    - name: Use Node.js 21
-      uses: actions/setup-node@v4.0.0
-      with:
-        node-version: 21
-        cache: 'npm'
-    - run: npm install 
-    - run: npx playwright install      
-    - run: npm run actions
+      - uses: actions/checkout@v4.1.1
+      - name: Setup Node.js 21
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version: 21
+          cache: 'npm'
+      - run: npm install
+      - run: npx playwright install
+      - run: npm run test:normal
+
+  e2e-zerostep:
+    name: Run ZeroStep AI Tests
+    runs-on: ubuntu-latest
+    env:
+     ZEROSTEP_API_KEY: ${{ secrets.ZEROSTEP }}  # Nome do segredo personalizado
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: Setup Node.js 21
+        uses: actions/setup-node@v4.0.0
+        with:
+          node-version: 21
+          cache: 'npm'
+      - run: npm install
+      - run: npx playwright install
+      - run: npm install @zerostep/playwright  # Instalação específica do ZeroStep
+      - run: npm run test:zerostep
 
   sonarcloud:
     name: Run SonarCloud

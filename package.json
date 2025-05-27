@@ -29,6 +29,9 @@
     "debug": "npx playwright test --output artifacts/media --ui --workers 1",
     "show-report": "npx playwright show-report artifacts/report",
     "actions": "npx playwright test --output artifacts/media --workers 1",
-    "ci": "npm run clean && npm run format && npm run verify && npm run test"
+    "ci": "npm run clean && npm run format && npm run verify && npm run test",
+    "src:normal": "npx playwright test src/normal/",
+    "src:zerostep": "npx playwright test src/zerostep/ --config=playwright-zerostep.config.ts",
+    "actions": "npm run test:normal && npm run test:zerostep"
   }
 }
