@@ -1,18 +1,14 @@
-// playwright-zerostep.config.ts
 import { defineConfig } from '@playwright/test';
-import zerostepConfig from '@zerostep/playwright';
+import zerostep from '@zerostep/playwright'; // Import as a config object or plugin
 
 export default defineConfig({
-  ...zerostepConfig,
-  // Configurações base do Playwright
+  ...zerostep, // Spread zerostep config if it's an object
   fullyParallel: true,
-  retries: process.env.CI ? 2 : 0, // Em CI, tenta 2 vezes se falhar
-  workers: process.env.CI ? 1 : undefined, // Em CI, 1 worker para estabilidade
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
 
-  // Configurações específicas do ZeroStep e outras opções do Playwright
   use: {
-    // Autenticação via secret do GitHub Actions
-    trace: 'on-first-retry', // Grava traces para debug
-    screenshot: 'only-on-failure'
-  },
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  }
 });
